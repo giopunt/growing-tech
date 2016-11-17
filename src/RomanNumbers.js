@@ -5,12 +5,12 @@ function romanNumbers(arabic) {
 		9: 'IX'
 	};
 
-	var numbersToRomans = {
-		1: 'I',
-		5: 'V',
-		10: 'X',
-		40: 'XL'
-	};
+	var numbersToRomans = [
+		{ arabicNum: 1, romanNum: 'I' },
+		{ arabicNum: 5, romanNum: 'V' },
+		{ arabicNum: 10, romanNum: 'X' },
+		{ arabicNum: 40, romanNum: 'XL' }
+	];
 
 	if(arabic === 0){
 		return "";
@@ -20,9 +20,18 @@ function romanNumbers(arabic) {
 		return anomolies[arabic];
 	}
 
-	if(numbersToRomans[arabic]){
-		return numbersToRomans[arabic];
-	}
+	for (var i = numbersToRomans.length - 1; i >= 0; i--) {
+		var arabicNum = numbersToRomans[i].arabicNum;
+		var romanNum = numbersToRomans[i].romanNum;
+
+		if(arabic === arabicNum)	{
+			return romanNum;
+		}
+		if(arabic > arabicNum)	{
+			return romanNum + romanNumbers(arabic - arabicNum);
+		}
+
+	};
 	
 	if(arabic > 40)	{
 		return 'XL' + romanNumbers(arabic - 40);
