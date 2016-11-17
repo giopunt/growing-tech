@@ -48,6 +48,26 @@ fdescribe("Roman Numbers", function(){
     {
       candidate: 49,
       expectation: "XLIX"
+    },
+    {
+      candidate: 59,
+      expectation: "LIX"
+    },
+    {
+      candidate: 99,
+      expectation: "XCIX"
+    },
+    {
+      candidate: 499,
+      expectation: "CDXCIX"
+    },
+    {
+      candidate: 599,
+      expectation: "DXCIX"
+    },
+    {
+      candidate: 999,
+      expectation: "CMXCIX"
     }
   ];
 
