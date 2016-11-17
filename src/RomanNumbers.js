@@ -1,10 +1,13 @@
 function romanNumbers(arabic) {
 
-	var numberMap = {
-		1: 'I',
+	var anomolies = {
 		4: 'IV',
+		9: 'IX'
+	};
+
+	var numbersToRomans = {
+		1: 'I',
 		5: 'V',
-		9: 'IX',
 		10: 'X',
 		40: 'XL'
 	};
@@ -13,8 +16,12 @@ function romanNumbers(arabic) {
 		return "";
 	}
 
-	if(numberMap[arabic]){
-		return numberMap[arabic];
+	if(anomolies[arabic]){
+		return anomolies[arabic];
+	}
+
+	if(numbersToRomans[arabic]){
+		return numbersToRomans[arabic];
 	}
 	
 	if(arabic > 40)	{
@@ -29,5 +36,7 @@ function romanNumbers(arabic) {
 		return 'V' + romanNumbers(arabic - 5);
 	}
 
-	return "I" + romanNumbers(arabic - 1);
+	if(arabic > 1){
+		return 'I' + romanNumbers(arabic - 1);
+	}
 }
