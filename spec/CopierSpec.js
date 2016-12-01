@@ -1,19 +1,19 @@
 fdescribe("Copier tested with Mocks and Stubs", function() {
 
 	var tests = [
-		{ 
+		{
 			description: "when the source is 'A'",
 			itText: "should copy 'A' to the destination",
 			expectedVal: ['A'],
 			sourceValue: ['A']
 		},
-		{ 
+		{
 			description: "when the source is 'AB'",
 			itText: "should copy 'A' and then 'B' to the destination in seperate calls",
 			expectedVal: ['A', 'B'],
 			sourceValue: ['A', 'B']
 		},
-		{ 
+		{
 			description: "when the source is 'AB' and ends in a new line",
 			itText: "should copy until the source is a newline character",
 			expectedVal: ['A', 'B'],
@@ -33,7 +33,9 @@ fdescribe("Copier tested with Mocks and Stubs", function() {
 				};
 				var destination = jasmine.createSpyObj('destination', ['setChar']);
 
-				spyOn(source, "getChar").and.returnValue(test.sourceValue.shift());
+				spyOn(source, "getChar").and.callFake(function(){
+					return test.sourceValue.shift();
+				}.bind(this));
 
 				var myCopier = new Copier(source, destination);
 				myCopier.copy();
@@ -69,19 +71,19 @@ describe("Copier tested with Spy and Fake", function(){
 	});
 
 	var tests = [
-		{ 
+		{
 			description: "when the source is 'A'",
 			itText: "should copy 'A' to the destination",
 			expectedVal: ['A'],
 			sourceValue: ['A']
 		},
-		{ 
+		{
 			description: "when the source is 'AB'",
 			itText: "should copy 'A' and then 'B' to the destination in seperate calls",
 			expectedVal: ['A', 'B'],
 			sourceValue: ['A', 'B']
 		},
-		{ 
+		{
 			description: "when the source is 'AB' and ends in a new line",
 			itText: "should copy until the source is a newline character",
 			expectedVal: ['A', 'B'],
@@ -97,7 +99,7 @@ describe("Copier tested with Spy and Fake", function(){
 				source.value  = test.sourceValue;
 
 				var myCopier = new Copier(source, destination);
-				
+
 				myCopier.copy();
 				expect(destination.value).toEqual(test.expectedVal);
 				expect(destination.invocations).toEqual(test.expectedVal.length);
